@@ -128,7 +128,11 @@ hiprintTemplate.toPdf(data, filename, {
 hiprintTemplate.on('printSuccess | printError', function(data){})
 ```
 
-### 本地打印机列表（不可用）`hiprintTemplate.getPrinterList()`
+### 本地打印机列表（不可用）
+
+```js
+hiprintTemplate.getPrinterList() // 可能须下载windows/mac/linux对应平台软件来支持
+```
 
 ### 面板内查找元素
 
@@ -202,10 +206,4 @@ panel.addPrintHline({options:{width,top,left}}) // 位置（pt）
 
 ```js
 panel.addPrintRect({options:{width,height,top,left}}) // 位置（pt）
-```
-
-## 模板预览
-
-```js
-hiprintTemplate.design('selector')
 ```
