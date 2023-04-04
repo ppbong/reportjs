@@ -17,43 +17,124 @@ var hiprintTemplate = new hiprint.PrintTemplate({
 })
 ```
 
-## 模板业务
+## 模板操作
 
-### `addPrintPanel(options)` 新增面板 `width` 宽mm `height` 高mm `paperHeader` 页眉线pt `paperFooter` 页尾线pt
+### 新增面板
 
-### `setFileds(fields)` 设置元素字段数据源
+```js
+hiprintTemplate.addPrintPanel({width,height,paperHeader,paperFooter})
+```
 
-### `getOrient()` 纸张方向（1纵向、2横向）
+### 设置元素字段数据源
 
-### `rotatePaper()` 旋转纸张
+```js
+hiprintTemplate.setFileds([{field:'',text:''}])
+```
 
-### `getPrintStyle(panelIndex)` 打印样式（border、padding、margin、size等）`panelIdex=0/1/...`
+### 当前纸张方向
 
-### `getPaperType(panelIndex)` 纸张类型（A4、A3等）`panelIdex=0/1/...`
+```js
+hiprintTemplate.getOrient() // 1纵向、2横向
+```
 
-### `clear()` 清空模板
+### 改变纸张方向
 
-### `getJson()` 模板格式数据（非配置型）
+```js
+hiprintTemplate.rotatePaper()
+```
 
-### `getJsonTid()` 模板格式数据（配置型）
+### 当前打印样式
 
-### `getHtml(data,options)` 模板渲染数据为HTML格式 `leftOffset`左偏移 `topOffset`右偏移 `pagerNumberToggleInEven`偶数页页码是否对称
+```js
+hiprintTemplate.getPrintStyle(panelIndex=0) // {border,padding,margin,size}
+```
 
-### `print(data,options)` 模板打印数据（含预览）`leftOffset`左偏移 `topOffset`右偏移 `pagerNumberToggleInEven`偶数页页码是否对称
+### 当前纸张类型
 
-### `print2(data,options)` 模板打印数据（无预览，须对应windows/mac/linux软件支持）
+```js
+hiprintTemplate.getPaperType(panelIndex=0) // A3|A4|A5|B3|B4|B5|undefined
+```
 
-### `printByHtml(html)` 打印任意HTML `printByHtml($('#id').html())`
+### 清空模板
 
-### `toPdf(data,filename,options)` 导出PDF文件 `leftOffset`左偏移 `topOffset`右偏移 `pagerNumberToggleInEven`偶数页页码是否对称 `scale` 清晰度2/4
+```js
+hiprintTemplate.clear()
+```
 
-### `on(eventName, callback(data))` 打印事件回调，eventName='printSuccess|printError'
+### 模板格式数据（非配置型）
 
-### `getPrinterList()` 本地打印机列表（不可用）
+```js
+hiprintTemplate.getJson()
+```
 
-### `design(elementSelector)` 模板预览 `#elementId`或`.elementClassName`
+### 模板格式数据（配置型）
 
-### `getElementByName(name, panelIndex=0)` 面板范围内查找元素[]
+```js
+hiprintTemplate.getJsonTid()
+```
+
+### 模板格式预览
+
+```js
+hiprintTemplate.design('#selector') // 预览使用的HTML容器
+```
+
+### 模板渲染数据（HTML格式）
+
+```js
+hiprintTemplate.getHtml(data, {
+    leftOffset,topOffset, // 位置偏移（pt）
+    pagerNumberToggleInEven:true, // 偶数页页码是否对称
+})
+```
+
+### 模板打印数据（HTML格式）
+
+```js
+hiprintTemplate.printByHtml($('#selector').html()) // 打印已渲染数据
+```
+
+### 模板打印数据（含预览）
+
+```js
+hiprintTemplate.print(data, {
+    leftOffset,topOffset, // 位置偏移（pt）
+    pagerNumberToggleInEven:true, // 偶数页页码是否对称
+})
+```
+
+### 模板打印数据（无预览）
+
+```js
+hiprintTemplate.print2(data, {
+    leftOffset,topOffset, // 位置偏移（pt）
+    pagerNumberToggleInEven:true, // 偶数页页码是否对称
+}) // 须下载windows/mac/linux对应平台软件来支持
+```
+
+### 直接导出文件（PDF格式）
+
+```js
+hiprintTemplate.toPdf(data, filename, {
+    leftOffset,topOffset, // 位置偏移（pt）
+    pagerNumberToggleInEven:true, // 偶数页页码是否对称
+    scale:2, // 缩放尺寸，影响清晰度
+})
+```
+
+### 打印事件回调
+
+```js
+hiprintTemplate.on('printSuccess | printError', function(data){})
+```
+
+### 本地打印机列表（不可用）`hiprintTemplate.getPrinterList()`
+
+### 面板内查找元素
+
+```js
+hiprintTemplate.getElementByName(name, panelIndex=0) // []
+```
 
 ## 面板对象
 
@@ -67,7 +148,7 @@ var panel = hiprintTemplate.addPrintPanel({width,height,paperType:'A4',
 })
 ```
 
-## 页面元素
+## 面板元素
 
 ### 文本
 
