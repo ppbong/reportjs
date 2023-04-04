@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title><%= title %></title>
+<!-- hiprint -->
+<link href="/assets/hiprint/2.5.4/css/hiprint.css" rel="stylesheet">
+<link href="/assets/hiprint/2.5.4/css/print-lock.css" rel="stylesheet">
+<link href="/assets/hiprint/2.5.4/css/print-lock.css" media="print" rel="stylesheet">
+
+<!-- jQuery (hiprint 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="/assets/jquery/1.12.4/jquery.min.js"></script>
+<!-- polyfill.min.js解决浏览器兼容性问题v6.26.0-->
+<script src="/assets/hiprint/2.5.4/polyfill.min.js"></script>
+<!-- hiprint 核心js-->
+<script src="/assets/hiprint/2.5.4/hiprint.bundle.js"></script>
+<!-- 条形码生成组件-->
+<script src="/assets/hiprint/2.5.4/plugins/JsBarcode.all.min.js"></script>
+<!-- 二维码生成组件-->
+<script src="/assets/hiprint/2.5.4/plugins/qrcode.js"></script>
+<!-- 调用浏览器打印窗口helper类，可自行替换-->
+<script src="/assets/hiprint/2.5.4/plugins/jquery.hiwprint.js"></script>
+</head>
+<body>
+<h1 ><%= title %></h1>
+<div id="templateDesignDiv"></div>
+<table id="testTable">
+    <thead>
+        <tr><th>ID</th><th>NAME</th><th>COMPANY</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>2023001</td><td>张三</td><td>微软</td></tr>
+        <tr><td>2023001</td><td>李四</td><td>谷歌</td></tr>
+    </tbody>
+</table>
+
+<script>
+    // hiprint 打印初始化，更多参数请查看文档
+    hiprint.init();
+
+    // 创建打印模板对象
+    var hiprintTemplate = new hiprint.PrintTemplate();
+
+    // 模板对象添加打印面板 paperHeader：页眉线 paperFooter：页尾线
+    var panel = hiprintTemplate.addPrintPanel({ width: 100, height: 130, paperFooter: 340, paperHeader: 10 });
+
+    // 文本 打印面板添加文本元素
+    panel.addPrintText({ options: { width: 140, height: 15, top: 20, left: 20, title: 'hiprint插件手动添加text', textAlign: 'center' } });
+ 
+    // 条形码 打印面板添加条形码元素
+    panel.addPrintText({ options: { width: 140, height: 35, top: 40, left: 20, title: '123456', textType: 'barcode' } });
+ 
+    // 二维码 打印面板添加二维码元素
+    panel.addPrintText({ options: { width: 35, height: 35, top: 40, left: 165, title: '二维码', textType: 'qrcode' } });
+ 
+    // 长文本 打印面板添加长文本元素
+    panel.addPrintLongText({ options: { width: 180, height: 35, top: 90, left: 20, title: '长文本：' } });
+ 
+    // 表格 打印面板添加表格元素 content为字符串
+    panel.addPrintTable({ options: { width: 252, height: 35, top: 130, left: 20, content: $('#testTable').html() } });
+ 
+    // html 打印面板添加自定义html content为字符串或$('..')
+    panel.addPrintHtml({ options: { width: 140, height: 35, top: 180, left: 20, content:'' } });
+
+    // 竖线
+    panel.addPrintVline({ options: { height: 35, top: 230, left: 20 } });
+
+    // 横线
+    panel.addPrintHline({ options: { width: 140, top: 245, left: 120 } });
+
+    // 矩形
+    panel.addPrintRect({ options: { width: 35, height: 35, top: 230, left: 60 } });
+
+    // 打印设计
+    hiprintTemplate.design('#templateDesignDiv');
+</script>
+
+
+</body>
+</html>
