@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title><%= title %></title>
+<!-- hiprint -->
+<link href="/assets/hiprint/2.5.4/css/hiprint.css" rel="stylesheet">
+<link href="/assets/hiprint/2.5.4/css/print-lock.css" rel="stylesheet">
+<link href="/assets/hiprint/2.5.4/css/print-lock.css" media="print" rel="stylesheet">
+
+<!-- jQuery (hiprint 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="/assets/jquery/1.12.4/jquery.min.js"></script>
+<!-- polyfill.min.js解决浏览器兼容性问题v6.26.0-->
+<script src="/assets/hiprint/2.5.4/polyfill.min.js"></script>
+<!-- hiprint 核心js-->
+<script src="/assets/hiprint/2.5.4/hiprint.bundle.js"></script>
+<!-- 条形码生成组件-->
+<script src="/assets/hiprint/2.5.4/plugins/JsBarcode.all.min.js"></script>
+<!-- 二维码生成组件-->
+<script src="/assets/hiprint/2.5.4/plugins/qrcode.js"></script>
+<!-- 调用浏览器打印窗口helper类，可自行替换-->
+<script src="/assets/hiprint/2.5.4/plugins/jquery.hiwprint.js"></script>
+
+<link href="/stylesheets/report.css" rel="stylesheet">
+<script src="/javascripts/report.js"></script>
+</head>
+<body>
+<div class="container">
+    <!-- 模板元素组件 -->
+    <div id="templateElementDiv"></div>
+    <!-- 模板格式预览 -->
+    <div id="templateDesignDiv"></div>
+    <!-- 模板元素设置 -->
+    <div id="templateSettingDiv"></div>
+</div>
+<div class="container">
+    <!-- 模板打印预览 -->
+    <div class="preview"></div>
+</div>
+</body>
+</html>

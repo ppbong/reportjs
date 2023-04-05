@@ -1,29 +1,45 @@
-const PanelOptions = {
-    /*A4=210mm*297mm*/
-    width: 210, // 页宽 mm
-    height: 297, // 页高 mm
-    paperHeader: 48, // 页眉 pt
-    paperFooter: 800, // 页尾 pt
-    paperNumberDisabled: false, // 禁用页码
-    // paperNumberFormat: 'paperNo-paperCount', // 页码格式
-    // panelPaperRule: 'odd', // 面板打印纸张规则：odd保持奇数，even保持偶数
-    // firstPaperFooter: 0, // 首页页尾线位置
-    // lastPaperFooter: 0,  // 尾页页尾线位置
-    // evenPaperFooter: 0,  // 偶数页页尾线位置
-    // oddPapaerFooter: 0,  // 奇数页页尾线位置
-    leftOffset: 0, // 打印左偏移
-    topOffset: 0,  // 打印右偏移
+const panelOption = {
+    width: 210,
+    height: 297,
+    paperType:'A4',
+    paperHeader: 45,
+    paperFooter: 700,
+    paperNumberLeft: 280,
+    paperNumberTop: 780,
+    paperNumberDisabled: false,
+    rotate: false,
 }
 
-const createPanel = (template, options) => {
-    const mergeOptions = {...PanelOptions, ...options}
-    var panel = template.addPrintPanel(mergeOptions)
-    return panel
+const labelOption = {
+    width: 200,
+    height: 24,
+    top: 60,
+    left: 30,
+    title: '测试文本',
+    field: 'name',
+    data: '123456',
+    textAlign:'center'
 }
 
-// PrintTemplate(options)
+var hiprintTemplate = null
 
-// var hiprintTemplate = new hiprint.hiprintTemplate({
-//     template: 
-// })
+window.onload = () => {
+    hiprint.init({
+        providers: [new configElementTypeProvider()]
+    })
 
+    hiprintTemplate = new hiprint.PrintTemplate({
+        settingContainer: '#templateSettingDiv',
+    })
+
+    var panelA = hiprintTemplate.addPrintPanel({...panelOption})
+    panelA.addPrintText({ options: {...labelOption} })
+
+    var panelB = hiprintTemplate.addPrintPanel({...panelOption})
+    panelB.addPrintText({ options: {...labelOption} })
+
+    hiprintTemplate.design('#templateDesignDiv')
+
+    $('.hiprint-headerLine').css('border', '1px solid red')
+    $('.hiprint-footerLine').css('border', '1px solid red')
+}
