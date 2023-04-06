@@ -25,11 +25,11 @@ var hiprintTemplate = null
 
 window.onload = () => {
     hiprint.init({
-        providers: [new configElementTypeProvider()]
+        // providers: [new configElementTypeProvider()]
     })
 
     hiprintTemplate = new hiprint.PrintTemplate({
-        settingContainer: '#templateSettingDiv',
+        // settingContainer: '#templateSettingDiv',
     })
 
     var panelA = hiprintTemplate.addPrintPanel({...panelOption})
@@ -42,4 +42,40 @@ window.onload = () => {
 
     $('.hiprint-headerLine').css('border', '1px solid red')
     $('.hiprint-footerLine').css('border', '1px solid red')
+}
+
+
+const previewHandler = () => {
+    $('.preview').html(hiprint.getHtml({
+        templates: [
+            {template: hiprintTemplate, data: {}, options: {}},
+            {template: hiprintTemplate, data: {}, options: {}},
+            {template: hiprintTemplate, data: {}, options: {}},
+        ]
+    }))
+
+    // hiprint.print({
+    //     templates: [
+    //         {template: hiprintTemplate, data: {}, options: {}},
+    //         {template: hiprintTemplate, data: {}, options: {}},
+    //         {template: hiprintTemplate, data: {}, options: {}},
+    //     ]
+    // })
+
+    var template = hiprintExtern()
+    template.externHtml2Pdf(hiprint.getHtml({
+        templates: [
+            {template: hiprintTemplate, data: {}, options: {}},
+            {template: hiprintTemplate, data: {}, options: {}},
+            {template: hiprintTemplate, data: {}, options: {}},
+        ]
+    }), 'test.pdf', {})
+
+    // $.ajax({
+    //     method: "POST",
+    //     url: '/report/topdf',
+    //     data: {html: $('.preview').html()}
+    // }).done((msg) => {
+        
+    // })
 }

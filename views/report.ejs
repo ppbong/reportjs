@@ -21,8 +21,13 @@
 <!-- 调用浏览器打印窗口helper类，可自行替换-->
 <script src="/assets/hiprint/2.5.4/plugins/jquery.hiwprint.js"></script>
 
+<script src="/assets/hiprint/2.5.4/plugins/jspdf/jspdf.min.js"></script>
+<script src="/assets/hiprint/2.5.4/plugins/jspdf/html2canvas.min.js"></script>
+
 <link href="/stylesheets/report.css" rel="stylesheet">
+<script src="/javascripts/hiprint-extern.js"></script>
 <script src="/javascripts/report.js"></script>
+
 </head>
 <body>
 <div class="container">
@@ -33,6 +38,7 @@
     <!-- 模板元素设置 -->
     <div id="templateSettingDiv"></div>
 </div>
+<button id="preview" onclick="previewHandler()">打印预览</button>
 <div class="container">
     <!-- 模板打印预览 -->
     <div class="preview"></div>
